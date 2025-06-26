@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<title>資料DL & 面談予約</title>
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+</head>
+<body>
+<script>
+const LIFF_ID     = "2007570662-YdkJA6MG"; 
+const PDF_URL     = "https://drive.google.com/drive/folders/1LIxxUcaWIvo9ZO5__u0GPCEiR9KwLSX7"; // ★資料
+const RESERVE_URL = "https://fluff-feeling-176.notion.site/21d67ad3a163803fade8eb064579b643?source=copy_link";     // ★予約ページ
+
+(async () => {
+  // 1) LIFF初期化
+  await liff.init({ liffId: LIFF_ID });
+
+  // 2) プロフィール取得（失敗対策で try/catch 推奨）
+  const uid = (await liff.getProfile()).userId;
+
+  // 3) メッセージ送信
+  await liff.sendMessages([
+    { type:'text', text:`📄プレゼントはこちら！\n${PDF_URL}`},
+    { type:'text', text:`📅面談予約はこちら👇\n${RESERVE_URL}`}
+  ]);
+
+  // 4) 予約ページへ自動遷移（LINE 内ブラウザで開く）
+  await liff.openWindow({ url: RESERVE_URL, external:false });
+
+  // 5) ウインドウを閉じたい場合は openWindow の代わりに liff.closeWindow()
+})();
+</script>
+</body>
+</html>
