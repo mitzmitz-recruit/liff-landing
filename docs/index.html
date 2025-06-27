@@ -7,19 +7,64 @@
 <body>
 <script>
 const LIFF_ID  = "2007570662-YdkJA6MG";              // 既存ID
-const PDF_URL  = "https://drive.google.com/uc?id=XXX";
+const PDF_URL  = "https://drive.google.com/drive/folders/1LIxxUcaWIvo9ZO5__u0GPCEiR9KwLSX7";
 const RSVP_URL = "https://timerex.net/s/your-link";
 const CANVA_URL= "https://ntpf.my.canva.site/mitzmitz";
 
+
 (async () => {
   await liff.init({ liffId: LIFF_ID });
+
   await liff.sendMessages([
-    { type:'text', text:`資料はこちら！\n${PDF_URL}`},
-    { type:'text', text:`📅面談予約はこちら👇\n${RSVP_URL}`}
+    {
+      type: 'flex',
+      altText: '資料と面談予約のご案内',
+      contents: {
+        type: 'bubble',
+        size: 'mega',
+        body: {
+          type: 'box',
+          layout: 'vertical',
+          spacing: 'md',
+          contents: [
+            {
+              type: 'text',
+              text: '📄 資料ダウンロード',
+              weight: 'bold',
+              size: 'lg'
+            },
+            {
+              type: 'text',
+              text: PDF_URL,
+              size: 'sm',
+              wrap: true,
+              color: '#3366BB'
+            },
+            {
+              type: 'separator',
+              margin: 'md'
+            },
+            {
+              type: 'text',
+              text: '📅 面談予約',
+              weight: 'bold',
+              size: 'lg',
+              margin: 'md'
+            },
+            {
+              type: 'text',
+              text: RSVP_URL,
+              size: 'sm',
+              wrap: true,
+              color: '#3366BB'
+            }
+          ]
+        }
+      }
+    }
   ]);
+
   // チャット送信のあと Canva へ遷移
-  await liff.openWindow({ url: CANVA_URL, external:false });
+  await liff.openWindow({ url: CANVA_URL, external: false });
 })();
 </script>
-</body>
-</html>
