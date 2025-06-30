@@ -31,7 +31,7 @@ const CANVA_URL= "https://ntpf.my.canva.site/mitzmitz";
             type: 'button',
             style: 'primary',
             color: '#4285F4',
-            action: { type: 'uri', uri: PDF_URL, label: '📄 特典資料をダウンロード！🎁' }
+            action: { type: 'uri', uri: PDF_URL, label: '📄 特典資料をダウンロード！' }
           },
           {
             type: 'button',
@@ -44,7 +44,6 @@ const CANVA_URL= "https://ntpf.my.canva.site/mitzmitz";
     }
   }
 ]);
-
 
   // チャット送信のあと Canva へ遷移
   await liff.openWindow({ url: CANVA_URL, external: false });
